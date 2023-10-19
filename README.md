@@ -53,4 +53,4 @@ button({ intent: 'secondary', size: 'large' });
 
 button({ state: { active: true }});
 // Returns: "block cursor-pointer border-blue-500 shadow-md text-white bg-blue-400 px-6 py-4 border"
-´´´
+```
