@@ -1,6 +1,6 @@
 import type { ClassValues, Composer, FlattendObject, Options, Selection } from '$lib/types';
 
-export class ClassVariants {
+export class CssClassComposer {
   protected base: string[];
   protected options: Options;
   protected defaults: FlattendObject;
@@ -123,8 +123,8 @@ export class ClassVariants {
   }
 }
 
-export function createComposer(base: ClassValues, options: Options) {
-  return new ClassVariants(base, options).createComposer();
+export function cssClassComposer(base: ClassValues, options: Options) {
+  return new CssClassComposer(base, options).createComposer();
 }
 
-export const cc = createComposer;
+export const ccc = cssClassComposer;

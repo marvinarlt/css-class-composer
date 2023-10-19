@@ -1,7 +1,7 @@
 import { test, expect } from 'vitest';
-import { cc } from '$lib/index';
+import { ccc } from '$lib/index';
 
-const composer = cc('block cursor-pointer', {
+const compose = ccc('block cursor-pointer', {
   variants: {
     intent: {
       primary: 'text-white bg-blue-400',
@@ -31,13 +31,13 @@ const composer = cc('block cursor-pointer', {
 });
 
 test('Default styles', () => {
-  expect(composer()).toBe('block cursor-pointer text-white bg-blue-400 px-6 py-4 overflow-hidden');
+  expect(compose()).toBe('block cursor-pointer text-white bg-blue-400 px-6 py-4 overflow-hidden');
 });
 
 test('Flat variant based styles', () => {
-  expect(composer({ intent: 'secondary', size: 'large', base: false })).toBe('block cursor-pointer text-grey-900 bg-grey-300 px-8 py-6');
+  expect(compose({ intent: 'secondary', size: 'large', base: false })).toBe('block cursor-pointer text-grey-900 bg-grey-300 px-8 py-6');
 });
 
 test('Nested state based styles', () => {
-  expect(composer({ state: { active: true }})).toBe('block cursor-pointer border-blue-500 shadow-md text-white bg-blue-400 px-6 py-4 overflow-hidden border');
+  expect(compose({ state: { active: true }})).toBe('block cursor-pointer border-blue-500 shadow-md text-white bg-blue-400 px-6 py-4 overflow-hidden border');
 });
