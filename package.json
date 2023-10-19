@@ -1,7 +1,6 @@
 {
-  "name": "class-variants",
-  "private": true,
-  "version": "1.0.0",
+  "name": "css-class-composer",
+  "version": "0.1.0",
   "type": "module",
   "files": ["dist"],
   "main": "./dist/index.umd.cjs",
