@@ -5,7 +5,7 @@ export type FlattendObject = {
 };
 export type Options = {
     variants: Variant;
-    compounds: Array<Selection & {
+    compounds?: Array<Selection & {
         class: string;
     }>;
     default: Selection;

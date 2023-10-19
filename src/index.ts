@@ -8,7 +8,7 @@ export type FlattendObject =  {
 
 export type Options = {
   variants: Variant,
-  compounds: Array<Selection & {
+  compounds?: Array<Selection & {
     class:  string,
   }>,
   default: Selection,
@@ -35,7 +35,10 @@ export class CssClassComposer {
     this.base = this.formatClassValues(base);
     this.defaults = this.flatten(options.default);
     this.variants = this.flatten(options.variants);
-    this.compounds = options.compounds.map((compound) => this.flatten(compound));
+    
+    this.compounds = typeof options.compounds !== 'undefined'
+      ? options.compounds.map((compound) => this.flatten(compound))
+      : [];
   }
 
   public createComposer(): Composer {

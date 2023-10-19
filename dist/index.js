@@ -1,14 +1,14 @@
 var a = Object.defineProperty;
-var l = (o, t, s) => t in o ? a(o, t, { enumerable: !0, configurable: !0, writable: !0, value: s }) : o[t] = s;
-var f = (o, t, s) => (l(o, typeof t != "symbol" ? t + "" : t, s), s);
-class u {
+var u = (o, t, s) => t in o ? a(o, t, { enumerable: !0, configurable: !0, writable: !0, value: s }) : o[t] = s;
+var f = (o, t, s) => (u(o, typeof t != "symbol" ? t + "" : t, s), s);
+class l {
   constructor(t, s) {
     f(this, "base");
     f(this, "options");
     f(this, "defaults");
     f(this, "variants");
     f(this, "compounds");
-    this.options = s, this.base = this.formatClassValues(t), this.defaults = this.flatten(s.default), this.variants = this.flatten(s.variants), this.compounds = s.compounds.map((e) => this.flatten(e));
+    this.options = s, this.base = this.formatClassValues(t), this.defaults = this.flatten(s.default), this.variants = this.flatten(s.variants), this.compounds = typeof s.compounds < "u" ? s.compounds.map((e) => this.flatten(e)) : [];
   }
   createComposer() {
     return (t) => {
@@ -65,11 +65,11 @@ class u {
   }
 }
 function d(o, t) {
-  return new u(o, t).createComposer();
+  return new l(o, t).createComposer();
 }
 const p = d;
 export {
-  u as CssClassComposer,
+  l as CssClassComposer,
   p as ccc,
   d as cssClassComposer
 };
