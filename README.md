@@ -4,6 +4,7 @@ Use this super tiny package to compose CSS class variants with ease.
 
 - Easy to use
 - Small bundle size
+- No third-party dependencies
 
 ## Getting started
 
