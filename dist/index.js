@@ -1,7 +1,7 @@
-var c = Object.defineProperty;
-var u = (o, t, s) => t in o ? c(o, t, { enumerable: !0, configurable: !0, writable: !0, value: s }) : o[t] = s;
-var f = (o, t, s) => (u(o, typeof t != "symbol" ? t + "" : t, s), s);
-class l {
+var a = Object.defineProperty;
+var l = (o, t, s) => t in o ? a(o, t, { enumerable: !0, configurable: !0, writable: !0, value: s }) : o[t] = s;
+var f = (o, t, s) => (l(o, typeof t != "symbol" ? t + "" : t, s), s);
+class u {
   constructor(t, s) {
     f(this, "base");
     f(this, "options");
@@ -31,7 +31,7 @@ class l {
   filterCompounds(t) {
     const s = this.filterIdentifier(t), e = [];
     for (const n of this.compounds)
-      this.filterIdentifier(n).every((a) => s.includes(a)) && e.push(n);
+      this.filterIdentifier(n).every((c) => s.includes(c)) && e.push(n);
     return e;
   }
   filterIdentifier(t) {
@@ -48,12 +48,12 @@ class l {
       return e;
     const n = Array.isArray(t) ? t.entries() : Object.entries(t);
     for (const [r, i] of n) {
-      const a = s.length > 0 ? `${s}.${r}` : r.toString();
+      const c = s.length > 0 ? `${s}.${r}` : r.toString();
       if (typeof i != "object") {
-        e[a] = i;
+        e[c] = i;
         continue;
       }
-      this.flatten(i, a, e);
+      this.flatten(i, c, e);
     }
     return e;
   }
@@ -65,11 +65,11 @@ class l {
   }
 }
 function d(o, t) {
-  return new l(o, t).createComposer();
+  return new u(o, t).createComposer();
 }
-const m = d;
+const p = d;
 export {
-  l as ClassVariants,
-  m as cc,
-  d as createComposer
+  u as CssClassComposer,
+  p as ccc,
+  d as cssClassComposer
 };

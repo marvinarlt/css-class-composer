@@ -1,5 +1,5 @@
 import { test, expect } from 'vitest';
-import { ccc } from '$lib/index';
+import { ccc } from './index';
 
 const compose = ccc('block cursor-pointer', {
   variants: {
