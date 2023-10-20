@@ -1,36 +1,53 @@
-export type ClassValues = string|string[];
-
-export type Composer = (selection?: Selection) => string;
-
 export type FlattendObject =  {
-  [key: string|number|symbol]: string|number|boolean,
+  [key: keyof any]: string | number | boolean,
 }
 
-export type Options = {
-  variants: Variant,
-  compounds?: Array<Selection & {
-    class:  string,
-  }>,
-  default: Selection,
+export type Composer<T extends Variant> = (selection?: Selection<T>) => string;
+
+export type ClassValue = string | string[];
+
+export type VariantKey = string;
+
+export type VariantValue = string | string[] | Variant;
+
+export type Variant<K extends VariantKey = string, V extends VariantValue = string> = {
+  [P in K]: V | Variant;
 }
 
-export type Variant = {
-  [name: string]: string|string[]|Variant,
+export type VariantSelection<K extends string, V extends VariantValue> = V extends Variant
+  ? {
+      [P in K]?: V[P] extends Variant
+        ? NextSelection<P, V> | keyof V[P]
+        : boolean
+    }
+  : never;
+
+export type NextSelection<K extends VariantKey, V extends Variant> = keyof V[K] extends VariantKey
+  ? VariantSelection<keyof V[K], V[K]>
+  : never;
+
+export type Selection<T extends Variant> = keyof T extends string
+  ? VariantSelection<keyof T, T>
+  : never;
+
+export type VariantCompound<T extends Variant> = Selection<T> & {
+  class: ClassValue,
 }
 
-export type Selection = {
-  [name: string]: string|boolean|Selection,
+export type Options<T extends Variant> = {
+  variants: T,
+  default: Selection<T>,
+  compounds?: VariantCompound<T>[],
 }
 
-
-export class CssClassComposer {
+export class CssClassComposer<T extends Variant> {
   protected base: string[];
-  protected options: Options;
+  protected options: Options<T>;
   protected defaults: FlattendObject;
   protected variants: FlattendObject;
   protected compounds: FlattendObject[];
 
-  public constructor(base: ClassValues, options: Options) {
+  public constructor(base: ClassValue, options: Options<T>) {
     this.options = options;
     this.base = this.formatClassValues(base);
     this.defaults = this.flatten(options.default);
@@ -41,8 +58,8 @@ export class CssClassComposer {
       : [];
   }
 
-  public createComposer(): Composer {
-    return (selection?: Selection): string => {  
+  public createComposer(): Composer<T> {
+    return (selection) => {
       if (typeof selection === 'undefined') {
         return this.compose(this.defaults);
       }
@@ -142,14 +159,14 @@ export class CssClassComposer {
       .join(' ');
   }
 
-  protected formatClassValues(values: ClassValues): string[] {
+  protected formatClassValues(values: ClassValue): string[] {
     return typeof values === 'string'
       ? values.split(' ')
       : values;
   }
 }
 
-export function cssClassComposer(base: ClassValues, options: Options) {
+export function cssClassComposer<T extends Variant>(base: ClassValue, options: Options<T>) {
   return new CssClassComposer(base, options).createComposer();
 }
 
