@@ -3,6 +3,7 @@
 Use this super tiny package to compose CSS class variants with ease.
 
 - Easy to use
+- Fully typed
 - Small bundle size
 - No third-party dependencies
 

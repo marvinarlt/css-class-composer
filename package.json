@@ -1,11 +1,22 @@
 {
   "name": "css-class-composer",
-  "version": "0.1.4",
+  "version": "1.0.0",
   "author": "marvinarlt",
   "type": "module",
   "files": [
     "dist"
   ],
+  "keywords": [
+    "css",
+    "class",
+    "className",
+    "composer",
+    "variants"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marvinarlt/css-class-composer.git"
+  },
   "main": "./dist/index.umd.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
